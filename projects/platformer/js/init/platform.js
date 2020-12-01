@@ -38,7 +38,10 @@
 
         // example:
         createPlatform(400, 250);
-        createPlatform(170, 460, 0.5);
+        createPlatform(290, 600, 0.5);
+        createPlatform(490, 530, 0.5); 
+        createPlatform(110, 432, 0.3);
+        createPlatform(20, 362, 0.4);
         
         // ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////
