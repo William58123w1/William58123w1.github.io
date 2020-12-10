@@ -21,10 +21,26 @@ var init = function (window) {
         ////////////////////////////////////////////////////////////
         ///////////////// PROGRAM SETUP ////////////////////////////
         ////////////////////////////////////////////////////////////
-        
+        var circle;
+        var circles = [];
+
         
 
+    
+            var loopCompleted = 0;
+            while (loopCompleted < 100) {
+                drawCircle();
+                loopCompleted++;
+            }
 
+        function drawCircle(){
+
+        circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+        physikz.addRandomVelocity(circle, canvas, 10, 10);
+        view.addChild(circle);
+        circles.push(circle);
+        var rightEdge = circle.x + circle.radius;
+        }
         ////////////////////////////////////////////////////////////
         ///////////////// PROGRAM LOGIC ////////////////////////////
         ////////////////////////////////////////////////////////////
@@ -35,9 +51,14 @@ var init = function (window) {
         and check to see if it has drifted off the screen.         
         */
         function update() {
-            
-           
-            
+
+
+            for (var i = 0; i < circles.length; i++) {
+                var circle = circles[i];
+
+                physikz.updatePosition(circle);
+                game.checkCirclePosition(circle);
+            }
         }
     
         /* 
@@ -47,9 +68,19 @@ var init = function (window) {
         */
         game.checkCirclePosition = function(circle) {
 
+            
+
             // if the circle has gone past the RIGHT side of the screen then place it on the LEFT
             if ( circle.x > canvas.width ) {
                 circle.x = 0;
+            } else if ( circle.x < 0 ) {
+                circle.x = canvas.width;
+            }
+            
+                if ( circle.y > canvas.height ) {
+                circle.y = 0;
+            } else if ( circle.y < 0 ) {
+                circle.y = canvas.height;
             }
             
         }
